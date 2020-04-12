@@ -3,6 +3,8 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  fetch("http://localhost:5000")
+
   return (
     <div className="App">
       <header className="App-header">
