@@ -1,14 +1,20 @@
-# Installation
+# COMP3005 Final Project
+
+Author: Andre Telfer
+
+
+
+## Installation
 
 Install docker and docker-compose
 
-# Running
+## Running
 
 ```
-docker-compose up -d
+docker-compose up -d --build
 ```
 
-# Stopping
+## Stopping
 
 ```
 docker-compose down
@@ -22,10 +28,10 @@ docker-compose down
 docker-compose logs
 ```
 
-#### Show logs for service
+#### Show (and attach) to service logs
 
 ```
-docker-compose logs <service>
+docker-compose logs -f -t <service>
 ```
 
 #### Update builds
@@ -39,7 +45,7 @@ docker-compose build --no-cache
 docker-compose run <service> <command...>
 ```
 
-### Restart single service
+#### Restart single service
 
 ```
 docker-compose restart <service>
