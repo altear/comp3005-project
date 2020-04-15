@@ -1,3 +1,4 @@
+-- Relation for storing books
 CREATE TABLE book (
     ISBN VARCHAR(13) PRIMARY KEY NOT NULL,
     title TEXT NOT NULL,
@@ -7,6 +8,7 @@ CREATE TABLE book (
     pages INT
 );
 
+-- Relation for storing addresses
 CREATE TABLE address_book (
     ID SERIAL PRIMARY KEY,
     address_1 TEXT,
@@ -16,6 +18,7 @@ CREATE TABLE address_book (
     postal_code TEXT
 );
 
+-- Relation for storing contact information
 CREATE TABLE contact_info (
     ID SERIAL PRIMARY KEY,
     address_id INT REFERENCES address_book (ID),
@@ -24,6 +27,7 @@ CREATE TABLE contact_info (
     name TEXT
 );
 
+-- Relation for storing publishers and their account numbers
 CREATE TABLE publisher (
     ID SERIAL PRIMARY KEY,
     holder_name TEXT,
@@ -34,6 +38,7 @@ CREATE TABLE publisher (
     contact_id INT REFERENCES contact_info (ID) NOT NULL
 );
 
+-- Relation for storing who a book was published by
 CREATE TABLE pub_by (
     ISBN VARCHAR(13) PRIMARY KEY,
     publisher_id INT REFERENCES publisher (ID) NOT NULL,
@@ -41,16 +46,19 @@ CREATE TABLE pub_by (
     payment_percent REAL
 );
 
+-- Relation for storing carts (carts keep track of items in orders or shopping carts)
 CREATE TABLE cart (
     ID SERIAL PRIMARY KEY
 );
 
+-- Relation for saving customer payment information
 CREATE TABLE payment_information (
     ID SERIAL PRIMARY KEY,
     holder_name TEXT,
     account_info TEXT
 );
 
+-- Relation for users (ie login information, contact, shopping cart, etc)
 CREATE TABLE user_account (
     username TEXT PRIMARY KEY,
     password TEXT NOT NULL,
@@ -60,16 +68,19 @@ CREATE TABLE user_account (
     preferred_payment INT REFERENCES payment_information (ID)
 ); 
 
+-- Relation for warehouse
 CREATE TABLE warehouse (
     ID SERIAL PRIMARY KEY,
     address_id INT REFERENCES address_book (ID) NOT NULL
 );
 
+-- Relation for showing the stock of books in warehouses
 CREATE TABLE stock (
     ISBN VARCHAR(13) PRIMARY KEY REFERENCES book (ISBN) NOT NULL,
     warehouse_id INT REFERENCES warehouse (ID) NOT NULL
 );
 
+-- Relation for showing the contents of a cart
 CREATE TABLE cart_contents (
     cart_id INT REFERENCES cart (ID) NOT NULL,
     ISBN VARCHAR(13) REFERENCES book (ISBN) NOT NULL,
@@ -77,6 +88,7 @@ CREATE TABLE cart_contents (
     PRIMARY KEY (cart_id, ISBN)
 );
 
+-- Relation for showing a user's orders
 CREATE TABLE user_order (
     ID SERIAL PRIMARY KEY,
     tracking_number TEXT NOT NULL,
@@ -87,6 +99,7 @@ CREATE TABLE user_order (
     payment_status TEXT
 );
 
+-- Relation for showing a user's review of a book
 CREATE TABLE user_review (
     ISBN VARCHAR(13) REFERENCES book NOT NULL,
     commenter TEXT REFERENCES user_account (username) NOT NULL,
@@ -96,6 +109,7 @@ CREATE TABLE user_review (
     PRIMARY KEY (ISBN, commenter)
 );
 
+-- A view for more unified book information
 CREATE VIEW book_details 
 AS SELECT * FROM book
 LEFT JOIN stock USING(ISBN)

@@ -11,7 +11,7 @@ ENV PATH /frontend/app/node_modules/.bin:$PATH
 COPY /frontend/app/package.json ./
 
 # COPY /frontend/app/package-lock.json ./
-RUN npm install --silent
+RUN yarn install --silent
 RUN npm install react-scripts@3.4.1 -g --silent
 
 # add app

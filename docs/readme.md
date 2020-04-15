@@ -9,25 +9,29 @@ Andre Telfer
 
 [TOC]
 
-## 1. Conceptual Design
+## 1. Problem Statement
 
-![](C:\Users\Owner\Documents\repos\comp3005-project\ER diagram.png)
+We are designing a bookstore. 
 
 
 
-## 2. Reduction to Relation Schema
+## 2. Project Report
 
-We used a slightly different format from the one described in class, but the structure is the same and more details are provided.
+### 2.1. Conceptual Design
 
-- Note this a full 
+![](C:\Users\Owner\Documents\repos\comp3005-project\docs\ER diagram.png)
+
+
+
+### 2.2. Reduction to Relation Schema
 
 ![](relation_schema.png)
 
-## 3. Normalization of Relation Schemas
+### 2.3. Normalization of Relation Schemas
 
 We used Third Normal Form (3NF)
 
-### book
+#### book
 
 
 $$
@@ -56,7 +60,7 @@ A &\rightarrow F &result &= ABCDEF \\
 $$
 Therefore ISBN is a superkey and this relation is in 3NF form
 
-### publisher
+#### publisher
 
 $$
 \begin{align}
@@ -89,7 +93,7 @@ $$
 
 Therefore ID is a superkey and this relation is in 3NF form
 
-### contact_info
+#### contact_info
 
 $$
 \begin{align}
@@ -113,7 +117,7 @@ $$
 
 Therefore ID is a superkey and this relation is in 3NF form
 
-### Simple cases
+#### Simple cases
 
 1. The following relations have only two attributes and one functional dependency connecting them, giving a clear primary key showing that they are in 3NF form
 
@@ -149,6 +153,44 @@ $\therefore$ for every functional dependency $\alpha\rightarrow \beta$ in $F_c$,
 - cart
 - warehouse
 
-## 4. 
-
 ...
+
+### 2.4. Database Schema Diagram
+
+I collapsed some of the 1-1 relations into the stronger entity (whichever one seemed like it would be used more) 
+
+![](C:\Users\Owner\Documents\repos\comp3005-project\docs\final_relational_schema.png)
+
+### 2.5. Implementation
+
+#### Tech Stack
+
+- Docker Compose: used to create database and server instances
+  - Postgres Image: the main database
+  - Redis: used for storing temporary sessions
+  - Flask (Python): The backend framework
+  - React: The frontend framework
+  - Nginx
+
+#### Store View
+
+![1586910787226](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\1586910787226.png)
+
+#### Login
+
+![1586910809431](C:\Users\Owner\AppData\Roaming\Typora\typora-user-images\1586910809431.png)
+
+I have the structure for creating APIs, user authentication (as well as permissions) that are working well with some simple session logic. Queries are fetched, data is sent. The basic pieces are there, unfortunately the higher level parts of the project are noticeably absent, I ran out of time. 
+
+- honestly I don't think I could've done better unless I had a group, it's been crazy and I'm so burnt out. Setting up the environment was a ton of work on its own.
+
+
+### 2.7 Github Repository
+GitHub Repository:
+<https://github.com/altear/comp3005-project>
+
+
+### 2.8 Appendix I
+I filled out the poll, but anytime works. It should be a short presentation.
+
+
